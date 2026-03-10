@@ -11,7 +11,7 @@ fn main() {
     // let sheet=book.get_sheet(0).unwrap();
     for row in 0..100 {
         for col in 0..100 {
-            sheet.cell(row,col).set_string(row*col)
+            sheet.cell(row,col).set_string(row*col).unwrap()
         }
     }
     book.save("1.xlsx").unwrap();

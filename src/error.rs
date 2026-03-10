@@ -1,7 +1,7 @@
 use std::error::Error;
 use std::ffi::NulError;
 use std::fmt::{Display, Formatter};
-use crate::error::XlrnError::StdError;
+use std::str::Utf8Error;
 
 #[derive(Debug)]
 pub enum XlrnError {
@@ -13,7 +13,13 @@ pub enum XlrnError {
 
 impl From<NulError> for XlrnError {
     fn from(value: NulError) -> Self {
-        StdError(Box::new(value))
+        XlrnError::StdError(Box::new(value))
+    }
+}
+
+impl From<Utf8Error> for XlrnError {
+    fn from(value: Utf8Error) -> Self {
+        XlrnError::StdError(Box::new(value))
     }
 }
 
@@ -23,7 +29,7 @@ impl Display for XlrnError {
             XlrnError::WorkBookNull => write!(f, "work book null"),
             XlrnError::WorkSheetNull => write!(f, "work sheet null"),
             XlrnError::FileNotFound => write!(f, "file not found"),
-            StdError(err) => write!(f, "{:?}", err),
+            XlrnError::StdError(err) => write!(f, "{:?}", err),
         }
     }
 }
