@@ -2,6 +2,9 @@
 name = "xlrn"
 version = "0.1.0"
 edition = "2024"
+authors = ["xllgl2017"]
+description = "A library binding for xlnt"
+license = "Apache-2.0"
 
 [dependencies]
 
