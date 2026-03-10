@@ -12,8 +12,8 @@ fn main() {
     match (target_os.as_str(), target_env.as_str()) {
         ("windows", "msvc") => println!("cargo:rustc-link-lib=advapi32"),
         ("windows", "gnu") => {
-            println!("cargo:rustc-link-lib=dylib=advapi32");
-            println!("cargo:rustc-link-lib=stdc++");
+            // println!("cargo:rustc-link-lib=dylib=advapi32");
+            // println!("cargo:rustc-link-lib=stdc++");
         }
         ("linux", "gnu") => println!("cargo:rustc-link-lib=dylib=stdc++"),
         (_, _) => {}
