@@ -1,4 +1,5 @@
 use std::ptr::null_mut;
+use crate::error::{XlrnError, XlrnResult};
 
 pub struct CPointer<T: CFree<T>> {
     ptr: *mut T,
@@ -23,10 +24,10 @@ impl<T: CFree<T>> CPointer<T> {
         }
     }
 
-    // pub fn new_checked(ptr: *mut T, e: XlrnError) -> XlrnResult<CPointer<T>> {
-    //     if ptr.is_null() { return Err(e); };
-    //     Ok(CPointer { ptr, auto_free: true })
-    // }
+    pub fn new_checked(ptr: *mut T, e: XlrnError) -> XlrnResult<CPointer<T>> {
+        if ptr.is_null() { return Err(e); };
+        Ok(CPointer { ptr, auto_free: true })
+    }
     // pub fn as_mut(&mut self) -> &mut *mut T { &mut self.ptr }
     pub fn as_mut_ptr(&self) -> *mut T { self.ptr }
     pub fn as_ptr(&self) -> *const T { self.ptr }

@@ -34,7 +34,7 @@ impl WorkBook {
 
     pub fn get_sheet(&self, index: usize) -> XlrnResult<WorkSheet> {
         let sheet = unsafe { ffi::WorkBook_sheet(self.book.as_ptr(), index) };
-        Ok(WorkSheet::new(CPointer::new(sheet)))
+        Ok(WorkSheet::new(CPointer::new_checked(sheet, XlrnError::WorkSheetNull)?))
     }
 
     pub fn save(&self, path: &str) -> XlrnResult<()> {
